@@ -1,0 +1,39 @@
+# Environment variables (VIKTIGT - API-nycklar!)
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Virtual environments
+venv/
+env/
+ENV/
+chatbot_env/
+
+# IDE files
+.vscode/settings.json
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Large model files (optional - om dina .pkl filer är för stora)
+# *.pkl
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp

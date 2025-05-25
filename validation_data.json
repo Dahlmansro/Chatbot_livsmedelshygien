@@ -1,0 +1,26 @@
+[
+  {
+    "question": "Vad är HACCP och varför är det viktigt i en restaurangverksamhet?",
+    "ideal_answer": "HACCP (Hazard Analysis and Critical Control Points) är en metod för att identifiera, bedöma och kontrollera faror i hantering av livsmedel. Det är ett verktyg för att säkerställa att maten som serveras är säker att äta. Det handlar om att analysera varje steg i livsmedelshanteringen – från råvaror till färdig produkt – och införa rutiner och kontroller för att förebygga, eliminera eller minska faror till en acceptabel nivå."
+  },
+  {
+    "question": "Vad menas med intern spårbarhet och är det ett lagkrav?",
+    "ideal_answer": "Intern spårbarhet innebär att man kan särskilja en sändning av livsmedel från en annan i till exempel lagret. Det är inte ett lagkrav, men kan vara mycket värdefullt vid hantering av problem med specifika produkter."
+  },
+  {
+    "question": "Vilken information måste gäster kunna få om maten vid frågor?",
+    "ideal_answer": "Gäster har rätt att få information om produktens beteckning, ingredienser, ursprung, portionsstorlek, hållbarhet och kontaktuppgifter till ansvarigt företag. Det är särskilt viktigt att information om allergener är korrekt."
+  },
+  {
+    "question": "Vad ska göras om det uppstår problem med förpackningar eller temperaturer vid leverans?",
+    "ideal_answer": "Om till exempel temperaturen är fel eller förpackningen är trasig, ska leverantören kontaktas och man måste besluta om varan kan användas, användas på annat sätt, kasseras eller returneras."
+  },
+  {
+    "question": "Hur ska man dokumentera en genomförd kurs?",
+    "ideal_answer": "Bockas av i åtgärdslistan och eventuella kursintyg (kopior) sparas tillsammans med personalens övriga personaluppgifter.."
+  },
+  {
+    "question": "I en faroanalys, vad ska man tänka på vad gäller upphettning?",
+    "ideal_answer": "Genomstekning av malet kött, kyckling och kalkon. Rosastekt hamburgare. Helt kött steks/upphettas på alla ytor. Fritering av potatisprodukter till gyllengul färg på ytan och ljus rostning av bröd."
+  }
+]
