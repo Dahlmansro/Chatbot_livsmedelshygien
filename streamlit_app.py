@@ -98,6 +98,14 @@ def load_css():
     .stSpinner {
         color: white;
     }
+
+    /* Styling för hint-text */
+    .hint-text {
+        color: rgba(255,255,255,0.7);
+        font-size: 0.9rem;
+        margin-top: -10px;
+        text-align: center;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -283,7 +291,24 @@ def main():
         input_col, button_col = st.columns([5, 1])
         
         with input_col:
-            query = st.text_input("", placeholder="T.ex. Vad är HACCP?", key="query_input", label_visibility="collapsed")
+            # Smart hantering av förifylld exempelfråga
+            if "first_run" not in st.session_state:
+                st.session_state.first_run = False
+                default_value = "Vad är HACCP?"
+                placeholder_text = ""
+            else:
+                default_value = ""
+                placeholder_text = "T.ex. Vad är temperaturkrav för kött?"
+            
+            query = st.text_input("", 
+                                value=default_value,
+                                placeholder=placeholder_text,
+                                key="query_input", 
+                                label_visibility="collapsed")
+            
+            # Visa hint endast när exempelfrågan är förifylld
+            if default_value:
+                st.markdown('<p class="hint-text">💡 Tryck Enter för att testa exempelfrågan</p>', unsafe_allow_html=True)
         
         with button_col:
             # Använd CSS för exakt positionering
@@ -296,8 +321,8 @@ def main():
             """, unsafe_allow_html=True)
             send_button = st.button("➤", help="Skicka fråga", key="send_btn")
 
-    # Hantera både Enter-tryck och knapp-klick
-    if query and (send_button or query != st.session_state.get('previous_query', '')):
+    # Förbättrad hantering av Enter-tryck och knapp-klick
+    if query.strip() and (send_button or query != st.session_state.get('previous_query', '')):
         st.session_state.previous_query = query
         
         with st.spinner("🔍 Söker efter relevant information..."):
@@ -315,7 +340,7 @@ def main():
                 # Generera svar
                 answer = generate_response(normalized_query, context, model)
 
-                # ✅ Visa svaret i ett korrekt inneslutet block
+                # Visa svaret i ett korrekt inneslutet block
                 st.markdown(f'''
                     <div class="answer-container">
                         <h3>💬 Svar:</h3>
@@ -372,7 +397,7 @@ def main():
         - Källa: [Visitas Branschriktlinjer](https://visita.se/app/uploads/2021/06/Visita_Branschriktlinjer-print_2021.pdf)
         
         **Så här använder du chatten:**
-        1. Skriv din fråga i textfältet
+        1. Skriv din fråga i textfältet (eller använd exempelfrågan första gången)
         2. Tryck Enter eller klicka på pil-knappen (➤)
         3. Om du vill ha mer detaljerad information, klicka på "Ja, ge mer detaljerat svar"
         """)
