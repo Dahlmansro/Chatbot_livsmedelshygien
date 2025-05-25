@@ -17,103 +17,51 @@ def load_css():
     /* Bakgrundsfärg för hela appen */
     .stApp {
         background-color: rgb(37, 150, 190);
-        height: 100vh;
     }
 
-    /* Dölj Streamlit-meny och footer */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    .stDeployButton {display:none;}
-
-    /* Chat-container styling */
-    .chat-container {
-        height: 70vh;
-        overflow-y: auto;
-        padding: 20px;
-        margin-bottom: 20px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 15px;
-        backdrop-filter: blur(10px);
+    /* Styling för huvudtitel */
+    .main-title {
+        color: white;
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
 
-    /* Användarmeddelande styling */
+    /* Chat meddelande styling */
+    .chat-message {
+        padding: 1rem;
+        border-radius: 10px;
+        margin: 0.5rem 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
     .user-message {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background-color: rgba(102, 126, 234, 0.8);
         color: white;
-        padding: 15px 20px;
-        border-radius: 20px 20px 5px 20px;
-        margin: 10px 0 10px auto;
-        max-width: 80%;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        font-size: 1.1rem;
-        word-wrap: break-word;
+        margin-left: 2rem;
     }
 
-    /* Bot-svar styling */
     .bot-message {
-        background: rgba(255, 255, 255, 0.95);
+        background-color: rgba(255, 255, 255, 0.95);
         color: #333;
-        padding: 15px 20px;
-        border-radius: 20px 20px 20px 5px;
-        margin: 10px auto 10px 0;
-        max-width: 80%;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        font-size: 1.1rem;
-        line-height: 1.5;
-        word-wrap: break-word;
+        margin-right: 2rem;
     }
 
-    .bot-message .bot-icon {
-        color: rgb(37, 150, 190);
-        font-weight: bold;
-        margin-bottom: 8px;
-        display: block;
+    .welcome-message {
+        background-color: rgba(255, 255, 255, 0.95);
+        color: #333;
+        border-left: 4px solid rgb(37, 150, 190);
+        margin: 1rem 0;
     }
 
-    /* Detaljerad knapp styling */
-    .detailed-button-container {
-        text-align: left;
-        margin-top: 10px;
-    }
-
-    .detailed-button {
-        background: linear-gradient(135deg, rgb(37, 150, 190) 0%, #1e7e9a 100%);
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 15px;
-        font-size: 0.9rem;
-        cursor: pointer;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-    }
-
-    .detailed-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-
-    /* Input-område längst ner */
-    .input-container {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(37, 150, 190, 0.95);
-        padding: 20px;
-        backdrop-filter: blur(10px);
-        border-top: 2px solid rgba(255,255,255,0.3);
-        z-index: 1000;
-    }
-
-    /* Input-fält styling */
+    /* Input styling */
     .stTextInput > div > div > input {
         background-color: rgba(255, 255, 255, 0.95);
         border: 2px solid white;
-        border-radius: 25px;
-        padding: 15px 20px;
+        border-radius: 10px;
+        padding: 10px;
         font-size: 1.1rem;
-        width: 100%;
     }
 
     .stTextInput > div > div > input::placeholder {
@@ -121,84 +69,69 @@ def load_css():
         opacity: 1 !important;
     }
 
-    /* Skicka-knapp styling */
+    /* Button styling */
     .stButton > button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
+        background-color: white;
+        color: rgb(37, 150, 190);
+        border: 2px solid white;
+        border-radius: 8px;
+        font-weight: bold;
+        padding: 8px 16px;
+        font-size: 1rem;
+        width: 100%;
     }
 
     .stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    }
-
-    /* Styling för huvudtitel */
-    .main-title {
+        background-color: rgb(37, 150, 190);
         color: white;
-        text-align: center;
-        font-size: 2.2rem;
-        margin-bottom: 1rem;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        border: 2px solid white;
     }
 
-    /* Välkomstmeddelande */
-    .welcome-message {
-        background: rgba(255, 255, 255, 0.95);
-        color: #333;
-        padding: 20px;
-        border-radius: 20px;
-        margin: 20px auto;
-        max-width: 80%;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    /* Send button styling */
+    .send-button > button {
+        background-color: rgb(37, 150, 190);
+        color: white;
+        border: 2px solid rgb(37, 150, 190);
+        border-radius: 50px;
+        font-weight: bold;
+        padding: 8px 16px;
+        font-size: 1.1rem;
     }
 
-    .welcome-message .bot-icon {
+    .send-button > button:hover {
+        background-color: white;
         color: rgb(37, 150, 190);
-        font-size: 1.5rem;
-        margin-bottom: 10px;
+        border: 2px solid rgb(37, 150, 190);
     }
 
-    /* Spinner styling */
-    .stSpinner {
+    /* Expander styling */
+    .streamlit-expanderHeader {
+        background-color: rgba(255, 255, 255, 0.1);
         color: white;
+        border-radius: 5px;
     }
 
-    /* Scrollbar styling */
-    .chat-container::-webkit-scrollbar {
-        width: 6px;
+    /* Hide Streamlit branding */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    .stDeployButton {display: none;}
+
+    /* Spacing */
+    .chat-container {
+        max-height: 60vh;
+        overflow-y: auto;
+        padding: 1rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        margin-bottom: 2rem;
     }
 
-    .chat-container::-webkit-scrollbar-track {
-        background: rgba(255,255,255,0.1);
-        border-radius: 3px;
-    }
-
-    .chat-container::-webkit-scrollbar-thumb {
-        background: rgba(255,255,255,0.3);
-        border-radius: 3px;
-    }
-
-    .chat-container::-webkit-scrollbar-thumb:hover {
-        background: rgba(255,255,255,0.5);
-    }
-
-    /* Responsiv design */
-    @media (max-width: 768px) {
-        .user-message, .bot-message {
-            max-width: 95%;
-        }
-        
-        .main-title {
-            font-size: 1.8rem;
-        }
+    /* Input section styling */
+    .input-section {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+        border-radius: 10px;
+        margin-top: 2rem;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -331,64 +264,84 @@ def get_api_key():
     
     return api_key
 
-def display_chat_message(message_type, content, show_detailed_button=False, message_id=None):
-    """Visar ett chat-meddelande med korrekt styling"""
-    if message_type == "user":
-        st.markdown(f'''
-            <div class="user-message">
-                {content}
-            </div>
-        ''', unsafe_allow_html=True)
-    else:  # bot message
-        button_html = ""
-        if show_detailed_button and message_id:
-            button_html = f'''
-                <div class="detailed-button-container">
-                    <button class="detailed-button" onclick="window.parent.postMessage({{type: 'detailed_request', messageId: '{message_id}'}}, '*')">
-                        📋 Mer detaljerat svar
-                    </button>
-                </div>
-            '''
-        
-        st.markdown(f'''
-            <div class="bot-message">
-                <span class="bot-icon">🍽️ Chatbot</span>
-                {content}
-                {button_html}
-            </div>
-        ''', unsafe_allow_html=True)
-
-def initialize_chat_history():
-    """Initialiserar chat-historiken med välkomstmeddelande"""
+def initialize_chat():
+    """Initialiserar chat-sessionen"""
     if 'chat_history' not in st.session_state:
         st.session_state.chat_history = []
-        st.session_state.message_counter = 0
-        
-        # Lägg till välkomstmeddelande
-        welcome_msg = """
-        Hej! Jag är din assistent för livsmedelshygien. 🍽️
-        
-        Jag kan hjälpa dig med frågor om HACCP, temperaturkrav, rengöring, allergeninformation och mycket mer baserat på Visitas branschriktlinjer.
-        
-        **Testa gärna att fråga:** "Vad är HACCP?"
-        """
-        
-        st.session_state.chat_history.append({
-            'type': 'bot',
-            'content': welcome_msg,
-            'id': 'welcome',
-            'show_detailed': False
-        })
+        st.session_state.show_welcome = True
+
+def display_welcome_message():
+    """Visar välkomstmeddelande"""
+    st.markdown("""
+    <div class="chat-message welcome-message">
+        <h3>🍽️ Välkommen till Livsmedelshygien Chatbot!</h3>
+        <p>Jag kan hjälpa dig med frågor om:</p>
+        <ul>
+            <li>HACCP-systemet</li>
+            <li>Temperaturkrav och förvaring</li>
+            <li>Rengöring och desinfektion</li>
+            <li>Allergeninformation</li>
+            <li>Branschriktlinjer från Visita</li>
+        </ul>
+        <p><strong>Testa gärna att fråga:</strong> "Vad är HACCP?"</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+def display_chat_history():
+    """Visar chat-historiken"""
+    if st.session_state.show_welcome:
+        display_welcome_message()
+    
+    for i, message in enumerate(st.session_state.chat_history):
+        if message['type'] == 'user':
+            st.markdown(f"""
+            <div class="chat-message user-message">
+                <strong>Du:</strong> {message['content']}
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            st.markdown(f"""
+            <div class="chat-message bot-message">
+                <strong>🍽️ Chatbot:</strong> {message['content']}
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Visa detaljerad knapp om tillgänglig
+            if message.get('show_detailed', False):
+                if st.button(f"📋 Ge mer detaljerat svar", key=f"detailed_{i}"):
+                    with st.spinner("📝 Skapar detaljerat svar..."):
+                        try:
+                            detailed_answer = generate_response(
+                                message['query'].lower().strip(),
+                                message['context'],
+                                st.session_state.model,
+                                detailed=True
+                            )
+                            
+                            # Lägg till detaljerat svar i historiken
+                            st.session_state.chat_history.append({
+                                'type': 'bot',
+                                'content': f"**Detaljerat svar:**\n\n{detailed_answer}",
+                                'show_detailed': False
+                            })
+                            
+                            # Markera att detaljerat svar har getts
+                            message['show_detailed'] = False
+                            
+                            st.rerun()
+                            
+                        except Exception as e:
+                            st.error(f"Ett fel inträffade: {e}")
+                            logging.error(f"Fel vid generering av detaljerat svar: {e}")
 
 # === HUVUDAPPLIKATION ===
 
 def main():
-    # Konfiguration för bred layout
+    # Sidkonfiguration
     st.set_page_config(
         page_title="Livsmedelshygien Chatbot",
         page_icon="🍽️",
-        layout="wide",
-        initial_sidebar_state="collapsed"
+        layout="wide"
     )
     
     # Ladda CSS
@@ -413,7 +366,7 @@ def main():
     # Konfigurera Gemini
     try:
         genai.configure(api_key=API_KEY)
-        model = genai.GenerativeModel("models/gemini-2.0-flash")
+        st.session_state.model = genai.GenerativeModel("models/gemini-2.0-flash")
     except Exception as e:
         st.error(f"Fel vid konfiguration av Gemini: {e}")
         st.stop()
@@ -421,69 +374,56 @@ def main():
     # Ladda data
     chunks, embeddings = load_data()
     
-    # Initialisera chat-historik
-    initialize_chat_history()
+    # Initialisera chat
+    initialize_chat()
 
-    # Titel
-    st.markdown('<h1 class="main-title">🍽️ Livsmedelshygien Chatbot</h1>', unsafe_allow_html=True)
-
-    # Chat-container för meddelanden
-    chat_container = st.container()
-    
-    # Skapa huvudlayout
-    col1, col2, col3 = st.columns([1, 6, 1])
+    # Layout
+    col1, col2, col3 = st.columns([1, 4, 1])
     
     with col2:
-        # Visa chat-historik
-        with chat_container:
-            st.markdown('<div class="chat-container">', unsafe_allow_html=True)
-            
-            for message in st.session_state.chat_history:
-                display_chat_message(
-                    message['type'], 
-                    message['content'],
-                    message.get('show_detailed', False),
-                    message.get('id')
-                )
-            
-            st.markdown('</div>', unsafe_allow_html=True)
+        # Titel
+        st.markdown('<h1 class="main-title">🍽️ Livsmedelshygien Chatbot</h1>', unsafe_allow_html=True)
         
-        # Mellanrum för input-området
-        st.markdown('<div style="height: 120px;"></div>', unsafe_allow_html=True)
+        # Chat-område
+        st.markdown('<div class="chat-container">', unsafe_allow_html=True)
+        display_chat_history()
+        st.markdown('</div>', unsafe_allow_html=True)
         
-        # Fast input-område längst ner
-        st.markdown('<div class="input-container">', unsafe_allow_html=True)
+        # Input-sektion längst ner
+        st.markdown('<div class="input-section">', unsafe_allow_html=True)
+        st.markdown("### 💬 Ställ din fråga:")
         
         # Input-fält och knapp
-        input_col, button_col = st.columns([6, 1])
+        input_col, button_col = st.columns([4, 1])
         
         with input_col:
             query = st.text_input(
-                "", 
-                placeholder="Skriv din fråga om livsmedelshygien här... (t.ex. 'Vad är HACCP?')",
-                key="chat_input",
+                "Fråga:",
+                placeholder="T.ex. Vad är HACCP? Vilka temperaturkrav gäller för kött?",
+                key="user_input",
                 label_visibility="collapsed"
             )
         
         with button_col:
-            send_button = st.button("➤", help="Skicka meddelande", key="send_btn")
+            st.markdown('<div class="send-button">', unsafe_allow_html=True)
+            send_button = st.button("➤ Skicka", key="send_btn")
+            st.markdown('</div>', unsafe_allow_html=True)
         
         st.markdown('</div>', unsafe_allow_html=True)
 
-    # Hantera nya meddelanden
-    if query.strip() and (send_button or query != st.session_state.get('last_processed_query', '')):
-        st.session_state.last_processed_query = query
+    # Hantera ny fråga
+    if query.strip() and (send_button or query != st.session_state.get('last_query', '')):
+        st.session_state.last_query = query
+        st.session_state.show_welcome = False  # Dölj välkomstmeddelandet
         
-        # Lägg till användarmeddelande
+        # Lägg till användarfråga
         st.session_state.chat_history.append({
             'type': 'user',
-            'content': query,
-            'id': f"user_{st.session_state.message_counter}"
+            'content': query
         })
-        st.session_state.message_counter += 1
         
-        # Generera bot-svar
-        with st.spinner("🔍 Tänker..."):
+        # Generera svar
+        with st.spinner("🔍 Söker efter relevant information..."):
             try:
                 # Sök relevanta chunks
                 normalized_query = query.lower().strip()
@@ -491,88 +431,50 @@ def main():
                 context = "\n\n".join(relevant_chunks)
                 
                 # Generera svar
-                answer = generate_response(normalized_query, context, model)
+                answer = generate_response(normalized_query, context, st.session_state.model)
                 
                 # Kontrollera om vi ska visa detaljerad knapp
                 show_detailed = "Vill du ha ett mer detaljerat svar?" in answer
                 
                 # Lägg till bot-svar
-                message_id = f"bot_{st.session_state.message_counter}"
                 st.session_state.chat_history.append({
                     'type': 'bot',
                     'content': answer,
-                    'id': message_id,
                     'show_detailed': show_detailed,
                     'query': query,
                     'context': context
                 })
-                st.session_state.message_counter += 1
                 
-                # Rensa input-fältet
-                st.session_state.chat_input = ""
+                # Rensa input
+                st.session_state.user_input = ""
                 
-                # Rerun för att visa nya meddelanden
+                # Uppdatera sidan
                 st.rerun()
                 
             except Exception as e:
                 st.error(f"Ett fel inträffade: {e}")
                 logging.error(f"Fel vid generering av svar: {e}")
 
-    # Hantera detaljerade svar-förfrågningar
-    if st.button("📋 Ge detaljerat svar", key="detailed_btn", help="Klicka för att få mer information"):
-        # Hitta senaste bot-meddelandet som kan få detaljerat svar
-        for i in range(len(st.session_state.chat_history) - 1, -1, -1):
-            message = st.session_state.chat_history[i]
-            if message['type'] == 'bot' and message.get('show_detailed', False):
-                with st.spinner("📝 Skapar detaljerat svar..."):
-                    try:
-                        detailed_answer = generate_response(
-                            message['query'].lower().strip(),
-                            message['context'],
-                            model,
-                            detailed=True
-                        )
-                        
-                        # Lägg till detaljerat svar
-                        st.session_state.chat_history.append({
-                            'type': 'bot',
-                            'content': f"**Detaljerat svar:**\n\n{detailed_answer}",
-                            'id': f"detailed_{st.session_state.message_counter}",
-                            'show_detailed': False
-                        })
-                        st.session_state.message_counter += 1
-                        
-                        # Markera att detaljerat svar har getts
-                        message['show_detailed'] = False
-                        
-                        st.rerun()
-                        
-                    except Exception as e:
-                        st.error(f"Ett fel inträffade: {e}")
-                        logging.error(f"Fel vid generering av detaljerat svar: {e}")
-                break
-
-    # JavaScript för smooth scrolling
-    st.markdown("""
-    <script>
-    function scrollToBottom() {
-        const chatContainer = document.querySelector('.chat-container');
-        if (chatContainer) {
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-    }
-    
-    // Scroll när sidan laddas
-    setTimeout(scrollToBottom, 100);
-    
-    // Scroll efter nya meddelanden
-    const observer = new MutationObserver(scrollToBottom);
-    const chatContainer = document.querySelector('.chat-container');
-    if (chatContainer) {
-        observer.observe(chatContainer, { childList: true, subtree: true });
-    }
-    </script>
-    """, unsafe_allow_html=True)
+    # Info-sektion
+    with st.expander("ℹ️ Om denna chatbot"):
+        st.markdown("""
+        **Livsmedelshygien Chatbot**
+        
+        - Denna chatbot svarar på frågor om livsmedelshygien baserat på Visitas branschriktlinjer
+        - Källa: [Visitas Branschriktlinjer](https://visita.se/app/uploads/2021/06/Visita_Branschriktlinjer-print_2021.pdf)
+        
+        **Så här använder du chatten:**
+        1. Skriv din fråga i textfältet längst ner
+        2. Tryck Enter eller klicka på "➤ Skicka"
+        3. Konversationen visas ovanför och växer uppåt
+        4. Klicka på "📋 Ge mer detaljerat svar" för utförligare information
+        
+        **Exempel på frågor:**
+        - Vad är HACCP?
+        - Vilka temperaturkrav gäller för kött?
+        - Hur ofta ska kylskåp rengöras?
+        - Vad är kritiska kontrollpunkter?
+        """)
 
 if __name__ == "__main__":
     main()
