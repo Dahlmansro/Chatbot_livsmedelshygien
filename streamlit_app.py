@@ -182,9 +182,8 @@ def generate_response(query, context, model, detailed=False):
             generation_config={
                 "max_output_tokens": max_tokens,
                 "stop_sequences": ["\n\n", "\nFråga:"]
-            },
-            safety_settings={"category": "harassment", "threshold": 3}
-)
+            }
+        )
 
         return response.text.strip()
     except Exception as e:
@@ -215,22 +214,50 @@ def load_data():
         st.error(f"Fel vid laddning av data: {e}")
         st.stop()
 
+def get_api_key():
+    """Hämtar API-nyckel från antingen .env-fil eller Streamlit secrets"""
+    # Först försök ladda från .env (för lokal utveckling)
+    load_dotenv()
+    
+    # Försök hämta från olika källor
+    api_key = (
+        os.getenv("GEMINI_API_KEY") or 
+        os.getenv("API_KEY") or
+        st.secrets.get("GEMINI_API_KEY", None) or
+        st.secrets.get("API_KEY", None)
+    )
+    
+    return api_key
+
 # === HUVUDAPPLIKATION ===
 
 def main():
     # Ladda CSS
     load_css()
     
-    # Konfiguration
-    load_dotenv()
-    API_KEY = os.getenv("API_KEY")
+    # Hämta API-nyckel
+    API_KEY = get_api_key()
     
     if not API_KEY:
-        st.error("API_KEY saknas! Kontrollera din .env-fil.")
+        st.error("""
+        ❌ API-nyckel saknas! 
+        
+        **För lokal utveckling:** Skapa en .env-fil med:
+        ```
+        GEMINI_API_KEY=din_api_nyckel_här
+        ```
+        
+        **För Streamlit Cloud:** Lägg till API-nyckeln i Secrets-sektionen.
+        """)
         st.stop()
     
-    genai.configure(api_key=API_KEY)
-    model = genai.GenerativeModel("models/gemini-2.0-flash")
+    # Konfigurera Gemini
+    try:
+        genai.configure(api_key=API_KEY)
+        model = genai.GenerativeModel("models/gemini-2.0-flash")
+    except Exception as e:
+        st.error(f"Fel vid konfiguration av Gemini: {e}")
+        st.stop()
 
     # Ladda data
     chunks, embeddings = load_data()
@@ -304,7 +331,6 @@ def main():
                 st.error(f"Ett fel inträffade: {e}")
                 logging.error(f"Fel i huvudloop: {e}")
 
-
     # Visa detaljerad svar-knapp om det behövs
     if st.session_state.show_detailed_option:
         col1, col2, col3 = st.columns([1, 1, 1])
@@ -314,7 +340,6 @@ def main():
                     try:
                         detailed_answer = generate_response(
                             st.session_state.last_query.lower().strip(),
-
                             st.session_state.last_context, 
                             model, 
                             detailed=True
@@ -336,7 +361,6 @@ def main():
                     except Exception as e:
                         st.error(f"Ett fel inträffade: {e}")
                         logging.error(f"Fel vid generering av detaljerat svar: {e}")
-
 
     # Info om systemet
     with st.expander("ℹ️ Om denna chatbot"):
