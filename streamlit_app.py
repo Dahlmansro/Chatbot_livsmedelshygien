@@ -121,16 +121,12 @@ def load_css():
         max-height: 60vh;
         overflow-y: auto;
         padding: 1rem;
-        background-color: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
         margin-bottom: 2rem;
     }
 
     /* Input section styling */
     .input-section {
-        background-color: rgba(255, 255, 255, 0.1);
         padding: 1rem;
-        border-radius: 10px;
         margin-top: 2rem;
     }
     </style>
@@ -377,7 +373,7 @@ def main():
     # Initialisera chat
     initialize_chat()
 
-    # Layout
+       # Layout
     col1, col2, col3 = st.columns([1, 4, 1])
     
     with col2:
@@ -392,89 +388,31 @@ def main():
         # Input-sektion längst ner
         st.markdown('<div class="input-section">', unsafe_allow_html=True)
         st.markdown("### 💬 Ställ din fråga:")
-        
-        # Input-fält och knapp
-        input_col, button_col = st.columns([4, 1])
-        
-        with input_col:
+
+        # Använd en form för att hantera input
+        with st.form("chat_form", clear_on_submit=True):
+            # Textinputfältet
             query = st.text_input(
                 "Fråga:",
-                placeholder="T.ex. Vad är HACCP? Vilka temperaturkrav gäller för kött?",
-                key="user_input",
-                label_visibility="collapsed"
+                placeholder="Skriv din fråga här...",
+                label_visibility="collapsed",
+                key="user_query"
             )
-        
-        with button_col:
-            st.markdown('<div class="send-button">', unsafe_allow_html=True)
-            send_button = st.button("➤ Skicka", key="send_btn")
+
+            # Knappen direkt under och vänsterställd
+            st.markdown('<div class="send-button" style="margin-top: 0.5rem;">', unsafe_allow_html=True)
+            send_button = st.form_submit_button("➤ Skicka")
             st.markdown('</div>', unsafe_allow_html=True)
-        
-        st.markdown('</div>', unsafe_allow_html=True)
 
-    # Hantera ny fråga
-    if query.strip() and (send_button or query != st.session_state.get('last_query', '')):
-        st.session_state.last_query = query
-        st.session_state.show_welcome = False  # Dölj välkomstmeddelandet
-        
-        # Lägg till användarfråga
-        st.session_state.chat_history.append({
-            'type': 'user',
-            'content': query
-        })
-        
-        # Generera svar
-        with st.spinner("🔍 Söker efter relevant information..."):
-            try:
-                # Sök relevanta chunks
-                normalized_query = query.lower().strip()
-                relevant_chunks = semantic_search(normalized_query, chunks, embeddings, k=5)
-                context = "\n\n".join(relevant_chunks)
-                
-                # Generera svar
-                answer = generate_response(normalized_query, context, st.session_state.model)
-                
-                # Kontrollera om vi ska visa detaljerad knapp
-                show_detailed = "Vill du ha ett mer detaljerat svar?" in answer
-                
-                # Lägg till bot-svar
-                st.session_state.chat_history.append({
-                    'type': 'bot',
-                    'content': answer,
-                    'show_detailed': show_detailed,
-                    'query': query,
-                    'context': context
-                })
-                
-                # Rensa input
-                st.session_state.user_input = ""
-                
-                # Uppdatera sidan
-                st.rerun()
-                
-            except Exception as e:
-                st.error(f"Ett fel inträffade: {e}")
-                logging.error(f"Fel vid generering av svar: {e}")
 
-    # Info-sektion
-    with st.expander("ℹ️ Om denna chatbot"):
-        st.markdown("""
-        **Livsmedelshygien Chatbot**
-        
-        - Denna chatbot svarar på frågor om livsmedelshygien baserat på Visitas branschriktlinjer
-        - Källa: [Visitas Branschriktlinjer](https://visita.se/app/uploads/2021/06/Visita_Branschriktlinjer-print_2021.pdf)
-        
-        **Så här använder du chatten:**
-        1. Skriv din fråga i textfältet längst ner
-        2. Tryck Enter eller klicka på "➤ Skicka"
-        3. Konversationen visas ovanför och växer uppåt
-        4. Klicka på "📋 Ge mer detaljerat svar" för utförligare information
-        
-        **Exempel på frågor:**
-        - Vad är HACCP?
-        - Vilka temperaturkrav gäller för kött?
-        - Hur ofta ska kylskåp rengöras?
-        - Vad är kritiska kontrollpunkter?
-        """)
+        # Info-sektion (flyttad hit för centrerad layout)
+        with st.expander("ℹ️ Om denna chatbot"):
+            st.markdown("""
+            **Livsmedelshygien Chatbot**
+
+            - Denna chatbot svarar på frågor om livsmedelshygien baserat på Visitas branschriktlinjer  
+            - Källa: [Visitas Branschriktlinjer](https://visita.se/app/uploads/2021/06/Visita_Branschriktlinjer-print_2021.pdf)
+            """)
 
 if __name__ == "__main__":
     main()
