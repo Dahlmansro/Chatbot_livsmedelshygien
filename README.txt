@@ -14,5 +14,6 @@
 
 4. Starta chatbotten:
    streamlit run streamlit_app.py
+   eller https://chatbotlivsmedelshygien.streamlit.app/
 
 ✅ Appen laddar in dina chunks och embeddings, söker efter relevant innehåll, skickar det till modellen och visar svaret i ett webbaserat gränssnitt.
