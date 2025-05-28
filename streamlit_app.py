@@ -14,6 +14,9 @@ logging.basicConfig(level=logging.INFO)
 def load_css():
     st.markdown("""
     <style>
+    /* Bakgrundsfärg för hela appen */
+    .stApp {
+        background-color: rgb(37, 150, 190);
     .main-title {
         text-align: center;
         font-size: 2.5em;
@@ -37,6 +40,28 @@ def load_css():
     </style>
     """, unsafe_allow_html=True)
 
+# === API-NYCKEL ===
+import os
+import streamlit as st
+import google.generativeai as genai
+
+# Kör endast load_dotenv() om .env finns (lokal körning)
+if os.path.exists(".env"):
+    from dotenv import load_dotenv
+    load_dotenv()
+
+# Hämta API-nyckel från .env (lokalt) eller st.secrets (Cloud)
+API_KEY = os.getenv("API_KEY") or st.secrets.get("API_KEY")
+
+# Stoppa appen om nyckeln saknas
+if not API_KEY:
+    st.error("❌ API_KEY saknas! Kontrollera .env lokalt eller secrets i Streamlit Cloud.")
+    st.stop()
+
+# Konfigurera API
+genai.configure(api_key=API_KEY)
+
+
 # === FUNKTIONER ===
 def cosine_similarity(vec1, vec2):
     return dot(vec1, vec2) / (norm(vec1) * norm(vec2))
@@ -54,16 +79,17 @@ def generate_response(query, context, model):
     prompt = f"Fråga: {query}\n\nKälltext:\n{context}\n\nSvar:"
     return model.generate_content(prompt).text
 
-def get_api_key():
-    load_dotenv()
-    return os.getenv("GOOGLE_API_KEY")
-
 def load_data():
-    with open("chunks.pkl", "rb") as f:
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    chunks_path = os.path.join(base_path, "semantic_chunks.pkl")
+    embeddings_path = os.path.join(base_path, "embeddings_chunks.pkl")
+
+    with open(chunks_path, "rb") as f:
         chunks = pickle.load(f)
-    with open("embeddings.pkl", "rb") as f:
+    with open(embeddings_path, "rb") as f:
         embeddings = pickle.load(f)
     return chunks, embeddings
+
 
 def initialize_chat():
     if "chat_history" not in st.session_state:
@@ -94,24 +120,16 @@ def handle_query(query, chunks, embeddings, model):
         'context': context
     })
     st.session_state.show_welcome = False
-    st.session_state.query_to_send = ""  # nollställ
+    st.session_state.query_to_send = ""  # Nollställ exempelfråga
 
 # === HUVUDPROGRAM ===
 def main():
     st.set_page_config(page_title="Livsmedelshygien Chatbot", page_icon="🍽️", layout="wide")
     load_css()
 
-    API_KEY = get_api_key()
-    if not API_KEY:
-        st.error("❌ API-nyckel saknas!")
-        st.stop()
-
-    try:
-        genai.configure(api_key=API_KEY)
-        st.session_state.model = genai.GenerativeModel("models/gemini-2.0-flash")
-    except Exception as e:
-        st.error(f"Fel vid konfiguration av Gemini: {e}")
-        st.stop()
+    #api_key = get_api_key()
+    #genai.configure(api_key=api_key)
+    #st.session_state.model = genai.GenerativeModel("models/gemini-2.0-flash")
 
     chunks, embeddings = load_data()
     initialize_chat()
@@ -123,25 +141,25 @@ def main():
         display_chat_history()
         st.markdown('</div>', unsafe_allow_html=True)
 
-        # 🔘 Klickbara exempelfrågor
+        # 🔘 Klickbara exempel
         st.markdown("#### 💡 Exempelfrågor:")
         example_questions = [
             "Vad är HACCP?",
             "Hur ofta ska man byta förkläde i köket?",
-            "Får man servera råbiff?",
+            "Får man servera råbiff?"
         ]
         for example in example_questions:
             if st.button(example, key=f"btn_{example}"):
                 st.session_state.query_to_send = example
                 st.rerun()
 
-        # 🔍 Om användaren har tryckt på en exempelfråga
+        # 🧾 Exempelfråga har klickats
         if st.session_state.query_to_send:
             with st.spinner("🔍 Letar efter svar..."):
                 handle_query(st.session_state.query_to_send, chunks, embeddings, st.session_state.model)
                 st.rerun()
 
-        # 🧾 Användarformulär
+        # 🧾 Användarfråga via formulär
         st.markdown("### 💬 Ställ din fråga:")
         with st.form("chat_form", clear_on_submit=True):
             query = st.text_input("Fråga", placeholder="Skriv din fråga här...", label_visibility="collapsed")

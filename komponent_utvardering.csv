@@ -4,19 +4,19 @@ Fråga 1:
 Vad är HACCP och varför är det viktigt i en restaurangverksamhet?
 
 AI:s svar:
-HACCP är ett system för att identifiera, utvärdera och kontrollera faror som påverkar livsmedelssäkerheten. Det är viktigt för att förebygga matförgiftning och säkerställa att maten är säker för konsumenterna. Vill du ha ett mer detaljerat svar?
+HACCP är ett system för att identifiera och kontrollera faror i livsmedelsproduktionen. Det är viktigt för att säkerställa matsäkerheten och skydda kunderna. Vill du ha ett mer detaljerat svar?
 
 Poäng:
-- Faktatrohet (Faithfulness): 1.00
-- Relevans (Relevancy): 1.00
-- Likhet med idealsvar (Similarity): 0.94
-- Medelpoäng: 0.98"
+- Faktatrohet (Faithfulness): 0.80
+- Relevans (Relevancy): 0.90
+- Likhet med idealsvar (Similarity): 0.93
+- Medelpoäng: 0.88"
 "============================================================
 Fråga 2:
 Vad menas med intern spårbarhet och är det ett lagkrav?
 
 AI:s svar:
-Intern spårbarhet innebär att kunna följa en vara inom ett företags egna verksamhet. Det är ett lagkrav enligt livsmedelslagstiftningen. Vill du ha ett mer detaljerat svar?
+Intern spårbarhet innebär att kunna följa en vara inom ett företag. Det är ett lagkrav för livsmedelsföretag. Vill du ha ett mer detaljerat svar?
 
 Poäng:
 - Faktatrohet (Faithfulness): 0.50
@@ -28,50 +28,50 @@ Fråga 3:
 Vilken information måste gäster kunna få om maten vid frågor?
 
 AI:s svar:
-Gäster ska kunna få information om allergener och ingredienser. De kan även fråga om näringsinnehåll. Vill du ha ett mer detaljerat svar?
+Gäster måste kunna få information om allergener och ingredienser. De kan även behöva information om näringsinnehåll. Vill du ha ett mer detaljerat svar?
 
 Poäng:
 - Faktatrohet (Faithfulness): 0.60
 - Relevans (Relevancy): 1.00
-- Likhet med idealsvar (Similarity): 0.90
-- Medelpoäng: 0.83"
+- Likhet med idealsvar (Similarity): 0.91
+- Medelpoäng: 0.84"
 "============================================================
 Fråga 4:
 Vad ska göras om det uppstår problem med förpackningar eller temperaturer vid leverans?
 
 AI:s svar:
-Problem ska rapporteras omedelbart till ansvarig person. Åtgärder ska vidtas för att säkerställa produktsäkerheten. Vill du ha ett mer detaljerat svar?
+Problem ska rapporteras till ansvarig och dokumenteras. Åtgärder ska vidtas direkt för att säkerställa livsmedelssäkerheten. Vill du ha ett mer detaljerat svar?
 
 Poäng:
-- Faktatrohet (Faithfulness): 0.70
-- Relevans (Relevancy): 0.70
-- Likhet med idealsvar (Similarity): 0.83
-- Medelpoäng: 0.74"
+- Faktatrohet (Faithfulness): 0.60
+- Relevans (Relevancy): 0.80
+- Likhet med idealsvar (Similarity): 0.79
+- Medelpoäng: 0.73"
 "============================================================
 Fråga 5:
 Hur ska man dokumentera en genomförd kurs?
 
 AI:s svar:
-Dokumentera kursen med intyg och beskrivning av innehållet. Spara dokumentationen lättillgängligt. Vill du ha ett mer detaljerat svar?
+Du bör spara intyg och kursmaterial. Du kan också skapa en sammanfattning av innehållet. Vill du ha ett mer detaljerat svar?
 
 Poäng:
-- Faktatrohet (Faithfulness): 0.60
+- Faktatrohet (Faithfulness): 0.70
 - Relevans (Relevancy): 0.90
-- Likhet med idealsvar (Similarity): 0.76
-- Medelpoäng: 0.75"
+- Likhet med idealsvar (Similarity): 0.80
+- Medelpoäng: 0.80"
 "============================================================
 Fråga 6:
 I en faroanalys, vad ska man tänka på vad gäller upphettning?
 
 AI:s svar:
-Vid upphettning bör man tänka på att tillräckligt hög temperatur uppnås och bibehålls under rätt tid för att döda skadliga mikroorganismer. Man måste också tänka på att upphettningen sker jämnt i hela produkten. Vill du ha ett mer detaljerat svar?
+Vid upphettning ska man tänka på att temperaturen är tillräckligt hög för att döda skadliga bakterier. Man måste också beakta uppvärmningstiden. Vill du ha ett mer detaljerat svar?
 
 Poäng:
 - Faktatrohet (Faithfulness): 0.50
-- Relevans (Relevancy): 0.90
-- Likhet med idealsvar (Similarity): 0.75
-- Medelpoäng: 0.72"
+- Relevans (Relevancy): 0.70
+- Likhet med idealsvar (Similarity): 0.72
+- Medelpoäng: 0.64"
 "============================================================
 SAMMANLAGD MEDELPOÄNG:
 
-- Genomsnittlig poäng över alla frågor: 0.80"
+- Genomsnittlig poäng över alla frågor: 0.78"
