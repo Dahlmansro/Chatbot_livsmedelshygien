@@ -10,6 +10,8 @@ Detta projekt syftar till att underlätta förståelsen av livsmedelshygien för
 📄 Dokumentationen omfattar cirka 60 sidor och kan vara svår att ta till sig för personer i köksmiljö. 
 https://visita.se/app/uploads/2021/05/Visita_Branschriktlinjer2021_uppslag-webb.pdf 
 💬 Med chattboten kan användare ställa frågor och få enkla, snabba svar – samt klicka fram mer detaljerad information vid behov.
+Du kan testa chatboten via följande länk:
+https://chatbotlivsmedelshygien.streamlit.app/
 
 ## Funktioner
 
