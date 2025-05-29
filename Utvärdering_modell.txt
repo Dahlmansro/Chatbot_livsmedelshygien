@@ -1,0 +1,67 @@
+Utvärdering av min modell
+
+Syfte
+Modellen syftar till att vara ett praktiskt stöd i arbetet med livsmedelshygien för personer som arbetar i restaurangkök.
+Den gör det enklare att ta till sig innehållet i branschorganisationens dokumentation, som i sin helhet omfattar cirka 60 sidor och kan vara svårnavigerad i en stressig arbetsmiljö.
+
+Chattboten möjliggör att användaren snabbt kan ställa frågor och få korta, konkreta svar. 
+Med ett knapptryck kan man därefter få en mer utförlig förklaring. Syftet är att skapa ett enkelt och pedagogiskt stöd som möter behoven i köksdriftens verklighet. 
+Appen är mobilanpassad, eftersom användningen sannolikt främst sker via mobiltelefon.
+
+Validering av modellen
+För att utvärdera modellens prestanda användes tre centrala kriterier:
+Faktatrohet (Faithfulness) – hur väl svaret överensstämmer med den källa svaret förväntas bygga på,
+Relevans (Relevancy) – hur väl svaret svarar på själva frågeställningen, och
+Likhet (Similarity) – hur likt modellens svar är ett i förväg formulerat idealsvar (mätt med cosinuslikhet).
+
+Dessa aspekter skattades automatiskt med hjälp av ytterligare AI-genererade omdömen. 
+Resultaten gavs som poäng mellan 0 och 1 och slogs samman till ett medelvärde per fråga.
+
+Det är dock viktigt att vara medveten om begränsningarna i denna form av validering:
+* Subjektivitet i AI:s egna skattningar: Eftersom modellen själv används för att bedöma faithfulness och relevancy finns risk för bias. 
+Det innebär att bedömningarna inte nödvändigtvis är objektiva eller jämförbara med en mänsklig granskning.
+* Mätbarhet av begreppen: Vad som räknas som “relevant” eller “faktatroget” är inte alltid entydigt, särskilt när frågorna rör breda eller tolkningståliga delar av dokumentet.
+* Begränsat testunderlag: Valideringen bygger på ett urval av frågor och idealsvar som jag själv definierat. 
+Resultaten säger därför främst något om just dessa exempel, inte nödvändigtvis om modellens generella prestanda.
+* Trots detta ger metoden en första indikation på modellens förmåga att ge svar som är både informativa och tillförlitliga. 
+* Chatt boten kommer att utvärderas i drift för att identifiera svagheter och potential innan den ev. utvecklas vidare. 
+
+Affärsmässigt perspektiv
+Appen bygger på öppen, publik dokumentation från branschorganisationen och medför därför inga affärsmässiga hinder kopplat till upphovsrätt eller exklusiv information.
+
+Möjligheter:
+
+* Kan integreras i onboardingprogram för nya medarbetare.
+* Kan användas som ett komplement i arbetet med HACCP och egenkontroll.
+* Skulle kunna licensieras eller paketeras som del av ett utbildningspaket.
+* Öppnar för samarbeten med utbildningsaktörer såsom yrkesutbildningar, kommuner eller Arbetsförmedlingen.
+* Insamling av anonym statistik över vilka frågor som ställs kan ge värdefulla insikter för framtida utbildningsinsatser.
+
+Utmaningar:
+
+* Vid eventuell kommersialisering krävs säkerställande av att informationen är aktuell och tydlig hantering av licens, ansvar, support och underhåll.
+
+Etiska aspekter
+Innehållet bygger uteslutande på offentligt material och innehåller inte persondata eller känsliga uppgifter. 
+Det innebär att appen i nuläget inte har några direkta etiska risker ur GDPR-perspektiv.
+
+Det finns dock risk för feltolkningar eller att användaren överskattar AI-modellens auktoritet. 
+För att minimera detta har följande meddelande inkluderats i appen:
+
+"Detta är ett utbildningsverktyg. För officiell rådgivning, konsultera alltid kvalificerade livsmedelsexperter eller myndigheter."
+
+Vid framtida funktioner som röstinput eller skråkstöd kan etiska och juridiska frågor uppstå. 
+Dessa måste hanteras i enlighet med GDPR och best practices för AI-etik.
+
+Potentiell vidareutveckling
+
+* Integrera ytterligare dokumentation från exempelvis Livsmedelsverket. Detta kräver implementering av en vektordatabas.
+* Skråkstöd för att öka tillgängligheten bland personer med utländsk bakgrund.
+* Röstinput som alternativ inputmetod – kräver lösningar för datalagring, anonymisering och användarsamtycke.
+* Förbättrad kodstruktur genom att dela upp appen i moduler för bättre läsbarhet, testning och framtida utveckling.
+* Tillgänglighetsanpassning.
+
+Framtid och ansvar
+Om jag lyckas utveckla appen vidare enligt ovanstående plan, avser jag att skänka koden till branschorganisationen. 
+I samband med detta kan appen anpassas till organisationens grafiska profil och integreras i deras övriga verksamhet. 
+För långsiktig hållbarhet krävs dock en plan för underhåll och vidareutveckling.
