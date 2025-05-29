@@ -5,6 +5,7 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 import numpy as np
 
+# Sida och layout
 st.set_page_config(
     page_title="🍽️ Livsmedelshygien Expert",
     page_icon="🍽️",
@@ -12,7 +13,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-
+# Design av appen med CSS
 def load_advanced_css():
     st.markdown("""
     <style>
@@ -198,7 +199,7 @@ def load_advanced_css():
     </style>
     """, unsafe_allow_html=True)
 
-
+# Hämtar API-nyckeln först från .env, sedan från Streamlit secrets som fallback
 @st.cache_data
 def get_api_key():
     if os.path.exists(".env"):
@@ -211,7 +212,8 @@ def get_api_key():
     except:
         return None
 
-
+# Beräknar cosine similarity mellan två vektorer (t.ex. textembeddings)
+# Används för att mäta semantisk likhet – högre värde = mer lika innehåll
 def cosine_similarity(vec1, vec2):
     try:
         vec1 = np.array(vec1)
@@ -258,7 +260,7 @@ def semantic_search(query, chunks, embeddings, k=5):
     except Exception as e:
         return chunks[:k]
 
-
+# Genererar ett AI-svar baserat på användarens fråga och relevanta chunks
 def generate_response(query, chunks, embeddings, model, detailed=False):
     try:
         relevant_chunks = semantic_search(query, chunks, embeddings, k=5)
@@ -303,7 +305,7 @@ def generate_response(query, chunks, embeddings, model, detailed=False):
     except Exception as e:
         return f"Tyvärr uppstod ett fel vid generering av svar. Försök igen."
 
-
+# Läser in och cachar chunks och embeddings
 @st.cache_data
 def load_data():
     try:
@@ -316,7 +318,8 @@ def load_data():
         st.error(f"Fel vid laddning av data: {e}")
         st.stop()
 
-
+# Initierar nödvändiga variabler i session_state för att hålla reda på chattens "tillstånd"
+# Sparar historik, hantera pågående frågor och detaljerade svar
 def initialize_session_state():
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
@@ -327,7 +330,7 @@ def initialize_session_state():
     if "last_query" not in st.session_state:
         st.session_state.last_query = ""
 
-
+# Visar tidigare meddelanden (både från användare och AI)
 def display_chat_history():
 
     for message in st.session_state.chat_history:
@@ -342,7 +345,7 @@ def display_chat_history():
                 unsafe_allow_html=True
             )
 
-
+# Behandlar en fråga från användaren och hanterar ev. följdfråga om detaljerat svar
 def handle_query(query, chunks, embeddings, model):
     if not query.strip():
         return
@@ -390,16 +393,15 @@ def handle_query(query, chunks, embeddings, model):
 
     st.session_state.query_to_send = ""
 
-
-def show_detailed_option():
-    """Visa knapp för detaljerat svar"""
+# Visar knapp för att få ett mer detaljerat svar om senaste svaret var kort
+def show_detailed_option(chunks, embeddings):
     if (st.session_state.chat_history and
         not st.session_state.awaiting_detailed_response and
             len(st.session_state.chat_history) >= 1):
 
         last_message = st.session_state.chat_history[-1]
 
-        # Visa bara knappen om det senaste meddelandet är ett kort bot-svar
+        # Visar knappen om det senaste meddelandet är ett kort svar
         if (last_message['type'] == 'bot' and
                 len(last_message['content']) < 300):
 
@@ -416,9 +418,8 @@ def show_detailed_option():
                             'content': 'Ja, ge mig ett detaljerat svar'
                         })
 
-                        # Generera detaljerat svar direkt
+                        # Generera detaljerat svar
                         with st.spinner("🔍 Skapar detaljerat svar..."):
-                            chunks, embeddings = load_data()
                             api_key = get_api_key()
                             genai.configure(api_key=api_key)
                             model = genai.GenerativeModel("gemini-1.5-flash")
@@ -433,20 +434,20 @@ def show_detailed_option():
 
                         st.rerun()
 
-
+# Huvudfunktion som sätter ihop hela appens logik och layout
 def main():
     load_advanced_css()
 
     api_key = get_api_key()
     if not api_key:
-        st.error("❌ **API-nyckel saknas!**")
+        st.error("**API-nyckel saknas!**")
         st.info("Lägg till API_KEY i .env fil eller Streamlit secrets")
         st.stop()
 
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel("gemini-1.5-flash")
-
     chunks, embeddings = load_data()
+
     initialize_session_state()
 
     col1, col2, col3 = st.columns([1, 4, 1])
@@ -469,7 +470,7 @@ def main():
         display_chat_history()
 
         # Visa knapp för detaljerat svar
-        show_detailed_option()
+        show_detailed_option(chunks, embeddings)
 
         if st.session_state.query_to_send:
             handle_query(st.session_state.query_to_send,
@@ -503,7 +504,7 @@ def main():
             Denna AI-chatbot är tränad på Visitas officiella branschriktlinjer för restauranger 
             och hjälper dig med frågor om livsmedelshygien, HACCP, temperaturkontroll och säkra rutiner.
             
-            **📚 Datakälla:** Visitas Branschriktlinjer 2021  
+            **📚 Datakälla:** [Visitas Branschriktlinjer 2021 (PDF)](https://visita.se/app/uploads/2021/05/Visita_Branschriktlinjer2021_uppslag-webb.pdf)
             **🤖 AI-teknologi:** Google Gemini + RAG  
             **🎯 Användningsområde:** Utbildning och rådgivning inom livsmedelshygien
             
@@ -517,6 +518,6 @@ def main():
         </div>
         """, unsafe_allow_html=True)
 
-
+# Kör appen om filen körs direkt
 if __name__ == "__main__":
     main()
