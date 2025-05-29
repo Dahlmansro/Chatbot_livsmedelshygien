@@ -74,13 +74,14 @@ Modellen har testats mot riktlinjedokumentet från Visita och fungerar tillfreds
 
 ```plaintext
 .
-├── README.md                  # Du läser den nu
-├── requirements.txt           # Alla beroenden
-├── Semantic_chunking_1.ipynb  # Notebook för chunkning & embeddings
-├── streamlit_app.py           # Själva applikationen
-├── semantic_chunks.pkl        # Förberedda chunks
-├── komponent_utvardering.*    # Utvärderingsdata
-└── Visita_Branschriktlinjer*.pdf # Källdokument
+├── README.md                      # Du läser den nu
+├── requirements.txt               # Alla beroenden
+├── Semantic_chunking_1.ipynb      # Notebook för chunkning & embeddings
+├── streamlit_app.py               # Själva applikationen
+├── semantic_chunks.pkl            # Förberedda chunks
+├── komponent_utvardering.*        # Utvärderingsdata
+├── Utvärdering_modell.txt         # Resultat från modellutvärdering
+└── Visita_Branschriktlinjer*.pdf  # Källdokument
 ```
 
 ## Kom igång
